@@ -1,0 +1,45 @@
+TIME COMPLEXITY : O(n logn)
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int dif=nums[0]+nums[1]+nums[2];
+        sort(nums.begin(),nums.end());
+        for(int i=0; i<nums.size()-2; i++)
+        {
+            int s=i+1, l=nums.size()-1;
+            while(s<l)
+            {
+                int sum = nums[i]+nums[s]+nums[l];
+                if(abs(sum-target) < abs(dif-target))
+                    dif=sum;
+                if(sum<target)
+                    s++;
+                else
+                    l--;
+            }
+        }
+        return dif;
+    }
+};
+
+------------
+  TIME COMPLEXITY: O(n^3)
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int dif=target;
+        for(int i=0; i<nums.size()-2; i++)
+        {
+            for(int j=i+1;j<nums.size()-1; j++)
+            {
+                for(int k=j+1; k<nums.size(); k++)
+                {
+                    int sum = nums[i]+nums[j]+nums[k];
+                    if(sum-target < dif)
+                        dif = target-sum;
+                }  
+            }
+        }
+        return dif;
+    }
+};
