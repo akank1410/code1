@@ -6,3 +6,26 @@
         s=set(new)
         
         return len(s)
+        
+        -------------------
+        
+        
+        METHOD2 : c++ USING LISTS
+        
+            int doUnion(int a[], int n, int b[], int m)  {
+        //code here
+        
+        int arr[n+m];
+        merge(a,a+n,b,b+m,arr);
+        list<int> lis(arr,arr+n+m);
+        lis.sort();
+        lis.unique();
+        return lis.size();
+    }
+    
+    REFERENCE:
+    https://www.geeksforgeeks.org/list-unique-in-c-stl/
+    https://www.techiedelight.com/convert-array-list-cpp/
+    
+    
+    
