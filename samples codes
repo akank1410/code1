@@ -1,4 +1,6 @@
 #Move all negative elements to end 
+
+METHOD 1:
  void segregateElements(int arr[],int n)
     {
         // Your code goes here
@@ -15,3 +17,6 @@
         }
         reverse(arr+(n-c),arr+n);
     }
+
+METHOD2
+using stable_partition() -> https://www.geeksforgeeks.org/stdstable_partition-in-c/
