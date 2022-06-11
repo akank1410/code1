@@ -83,3 +83,20 @@ void segregateElements(int arr[],int n)
        
 
     }
+    
+    
+    METHOD 5:
+        def segregateElements(self, arr, n):
+        # Your code goes here
+        
+        neg = []
+        p = []
+        for i in arr:
+            if i>=0:
+                 p.append(i);
+            else:
+                neg.append(i);
+        a=p+neg
+        
+        for i in list(range(n)):
+            arr[i]=a[i]
