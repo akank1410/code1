@@ -9,6 +9,9 @@
         return len(s)
         =====
         
+        REFERENCE:
+        https://www.geeksforgeeks.org/python-get-unique-values-list/
+        
         
         
         -------------------
