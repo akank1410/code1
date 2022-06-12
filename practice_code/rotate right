@@ -1,0 +1,26 @@
+def rotate( arr, n):
+    
+    l=arr[n-1]
+    arr.pop()
+    arr.insert(0,l)
+    return arr
+    
+0.3/1.10
+
+
+----------------
+C++ | 0.01/1.42
+
+void rotate(int arr[], int n)
+{
+    
+    int ele = arr[n-1];
+    for(int i=n-1;i>0;i--)
+    {
+        arr[i]=arr[i-1];
+    }
+    arr[0]=ele;
+    
+}
+    
+    
