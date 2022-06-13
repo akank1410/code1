@@ -72,6 +72,22 @@ vector <int> v;
                 return arr.index(i,0,n-1)+1
                 
         return -1;
+        
+        ALTRRNATE
+        
+              j=1
+       d=dict()
+       for i in a:
+           if i in d.keys():
+               d[i] +=1
+           else:
+               d[i]=1
+       #print(d) print d here for your clarity
+       for i in a:
+           if d[i] > 1:
+               return j
+           j=j+1
+       return -1
 
 -----------------
 
@@ -90,5 +106,7 @@ class Solution:
             if c[arr[i]]>1:
                 return i+1
         return -1;
+        
+       
 
 
