@@ -1,0 +1,55 @@
+  TC exceeds
+  
+  int firstRepeated(int arr[], int n) {
+        // code here
+unordered_map<int, int> m;
+vector <int> v;
+    
+    for(int i=0; i<n;i++)
+        { 
+            m[arr[i]]++;
+            if(m[arr[i]] > 1)
+            {auto index = find(arr,arr+n,arr[i]);
+                v.push_back(distance(arr,index)+1);}
+        }
+        sort(v.begin(),v.end());
+        if(v.empty())
+        return -1;
+        else
+        return v[0];
+    }
+    
+  ---------------
+  TC exceeds
+  
+      int firstRepeated(int arr[], int n) {
+        // code here
+            
+    int c;
+    for(int i=0;i<n-1;i++)
+    {
+        if(find(arr+i+1,arr+n,arr[i]) !=&arr[n])
+        return i+1;
+    }
+        
+        return -1;
+    }
+    
+    
+    ----------------
+        METHOD3: tc-> 0.59/2.54
+        
+        int firstRepeated(int arr[], int n) {
+        // code here
+        unordered_map<int,int> m ;
+        for(int i=0;i<n;i++)
+        m[arr[i]]++;
+        
+        for(int i=0;i<n;i++)
+        if(m[arr[i]]>1)
+        return i+1;
+        
+        return -1;
+    }
+    
+    https://practice.geeksforgeeks.org/problems/first-repeating-element4018/1#
