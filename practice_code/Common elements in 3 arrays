@@ -1,0 +1,52 @@
+Algorithm [Common Elements] in 3 array
+
+1. Create 3 different maps to store frequency of each number in each array. (Single traversal i requires) 
+2.Store the map with min. size in a duplicate map;
+Traverse the duplicate map.
+For each element, find the min. of the freqency of element in all three maps.
+If the frequency is greater than 0 push it in the vector
+3. sort and return the vector
+
+TC : 0.6/1.47
+
+vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+        {
+            //code here.
+    unordered_map<int,int> a1;
+    unordered_map<int,int> a2;
+    unordered_map<int,int> a3;
+    vector<int>v;
+    unordered_map<int,int> dup;
+    
+    for(int i=0;i<n1;i++)
+    a1[A[i]]++;
+    
+    for(int i=0;i<n2;i++)
+    a2[B[i]]++;
+    
+    for(int i=0;i<n3;i++)
+    a3[C[i]]++;
+ 
+    if(a1.size()<a2.size() && a1.size()<a3.size())
+    dup=a1;
+    else if(a2.size()<a1.size() && a2.size()<a3.size())
+    dup=a2;
+    else
+    dup=a3;
+         
+    for(auto x:dup)
+    {
+        int ele=x.first;
+        int c= min(a1[ele],min(a2[ele],a3[ele]));
+        
+        if(c>0)
+        v.push_back(ele);
+        
+    }
+  
+    sort(v.begin(),v.end());
+    return v;
+}
+
+
+https://practice.geeksforgeeks.org/problems/common-elements1132/1#
