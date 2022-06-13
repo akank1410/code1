@@ -73,4 +73,22 @@ vector <int> v;
                 
         return -1;
 
+-----------------
+
+METHOD 5: 0.45/1.02 USING Counter from collections library
+
+from collections import Counter
+class Solution:
+    #Function to return the position of the first repeating element.
+    def firstRepeated(self,arr, n):
+        
+        #arr : given array
+        #n : size of the array
+        c = Counter(arr)
+        
+        for i in list(range(len(arr))):
+            if c[arr[i]]>1:
+                return i+1
+        return -1;
+
 
