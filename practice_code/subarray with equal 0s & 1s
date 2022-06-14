@@ -1,0 +1,21 @@
+ O(n)
+ long long int countSubarrWithEqualZeroAndOne(int arr[], int n)
+    {
+        //Your code here
+        unordered_map <int,int> mp;
+        long long int pre_sum = 0, res =0;
+        
+        mp[0] = 1;
+        for(int i=0;i<n;i++)
+        {
+            arr[i] = arr[i] == 0 ? -1:1;
+            pre_sum += arr[i];
+            res += mp[pre_sum];
+            mp[pre_sum]++;
+        }
+        
+        return res;
+            
+    }
+    
+    https://practice.geeksforgeeks.org/problems/count-subarrays-with-equal-number-of-1s-and-0s-1587115620/1#
