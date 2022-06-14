@@ -1,0 +1,56 @@
+METHOD 1: (using vector)
+TC : 0.53/1.67
+  
+  void rearrange(int arr[], int n) {
+	    // code here
+	    vector <int> pos;
+	    vector <int> neg;
+	    for(int i=0; i<n; i++)
+	    {
+	        if(arr[i] < 0)
+	            neg.push_back(arr[i]);
+	        else
+	            pos.push_back(arr[i]);
+	    }
+        
+        int i=0,j=0,k=0;
+        while(i<n)
+        {
+            if(j<pos.size()) arr[i++] = pos[j++];
+            if(k<neg.size()) arr[i++] = neg[k++];
+        }
+	  
+	}
+  -----------------------------------------------  -----------------------------------------------
+  
+  METHOD 2: TC: 0.57/1.67
+  	void rearrange(int arr[], int n) {
+	    // code here
+        queue<int> pos;
+        queue<int> neg;
+        
+        for(int i=0;i<n;i++)
+            (arr[i]>=0)? pos.push(arr[i]):neg.push(arr[i]);
+        
+        int i=0;
+        while(i<n)
+        {
+            if(i%2 == 0 ) {
+                if(!pos.empty())
+                {arr[i++] = pos.front(); pos.pop();}
+                else
+                {arr[i++] = neg.front(); neg.pop();}
+                
+            }
+            else{
+                if(!neg.empty())
+                {arr[i++] = neg.front(); neg.pop();}
+                else
+                {arr[i++] = pos.front(); pos.pop();}
+            }
+        }
+            
+    }
+    
+    ------------------------------------------------------------------------------------
+	  
