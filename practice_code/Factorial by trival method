@@ -1,0 +1,32 @@
+    vector<int> factorial(int N){
+        // code here
+           vector <int> v {1};
+   int p=0,carry=0;
+
+   for(int i=2;i<=N;i++)
+    {
+
+        for(int j=0;j<v.size();j++)
+        {
+            p= v[j]*i + carry;
+            v[j] = p%10;
+            carry = p/10;}
+  
+            //adding extra carry in the number
+            while(carry !=0)
+            {
+                int rem = carry%10;
+                v.push_back(rem);
+                carry = carry/10;
+
+            }
+        
+    }
+         reverse(v.begin(),v.end());
+        return v;
+        
+    }
+    
+};
+
+https://practice.geeksforgeeks.org/problems/factorials-of-large-numbers2508/1#
