@@ -1,0 +1,42 @@
+Hint :
+Calculate the sum of new rotation from the previous rotations.
+This brings up a similarity where only the multipliers of first and last element change 
+drastically and the multipllier of every other element increases or decreases by 1.
+So in this way, the sum of the  next rotation can be calculated from the sum of present rotation.
+
+TC: 0.33/1.37
+
+int max_sum(int A[],int N)
+{
+//Your code here
+    int sum=0,tot_sum = 0;
+    for(int i=0; i<N; i++)
+    {
+        sum = sum + (A[i]*i);
+        tot_sum = tot_sum + A[i];
+    }
+    
+    int max_sum = sum;
+    
+    for(int i=1; i<N; i++)
+    {
+        sum = sum - tot_sum + (N*A[i-1]);
+        max_sum = max(max_sum , sum);
+    }
+    
+    return max_sum;
+    
+LOGIC:
+0  1  2  3  4
+a  b  c  d  e
+
+
+
+S0 = a0 + b1 + c2 + d3 + e4 = b  + 2c  + 3d  + 4e  +     + (4a -  b -  c -  d -  e )  
+S1 = b0 + c1 + d2 + e3 + a4 =       c  + 2d  + 3e  + 4a  + (-a + 4b -  c -  d -  e ) = S0 - (a+b+c+d+e) +5a = S1
+S2 = c0 + d1 + e2 + a3 + b4 = 4b +     + 1d  + 2e  + 3a  + (-a -  b + 4c -  d -  e ) = S1 - (a+b+c+d+e) +5b = S2
+S3 = d0 + e1 + a2 + b3 + c4 = 3b + 4c  +     + 1e  + 2a  + (-a -  b -  c + 4d -  e ) = S2 - (a+b+c+d+e) +5c = S3
+S4 = e0 + a1 + b2 + c3 + d4 = 2b + 3c  + 4d  +     + 1a  + (-a -  b -  c -  d + 4e ) = S3 - (a+b+c+d+e) +5d = S4 
+
+---------------------------------------------------------------------------------------------------------------------------
+    
