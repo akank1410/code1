@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int cmp(pair<int,int> a, pair<int,int> b)
+{
+    return a.second<b.second;
+} 
+
+int cmpp( pair<int,int> a, pair<int,int> b)
+{
+    return a.first<b.first;
+}
+
+int main() {
+
+int n=6; 
+int a[]={4,2,5,1,8,0,2,44,23};
+
+unordered_map<int,int> m;
+for(int i=0; i<n; i++)
+m[a[i]]= i;
+
+for(auto x:m)
+cout<<x.first<<" "<<x.second<<endl;
+
+cout<<"\nKEY VALUE\n";
+unordered_map<int,int>:: iterator x;
+for(x=m.begin(); x!=m.end(); x++)
+cout<<x->first<<" :: "<<x->second<<endl;
+
+vector< pair<int,int> > v(m.begin(), m.end());
+
+for(int i=0; i<v.size(); i++)
+    cout<<v[i].first<<" "<<v[i].second<<endl;
+
+/*cout<<"Sorting on the basis of value \n";
+cout<<"\nKEY VALUE\n";
+
+sort(v.begin(), v.end(), cmp);
+
+for(int i=0; i<n; i++)
+    cout<<v[i].first<<" "<<v[i].second<<endl;*/
+
+cout<<"Sorting on the basis of key \n";
+
+sort(v.begin(),v.end(),cmpp);
+
+for(int i=0; i<v.size(); i++)
+cout<<v[i].first<<" "<<v[i].second<<endl;
+
+return 0;
+}
+
+RESULT:
+
+0 5
+2 1
+4 0
+5 2
+1 3
+8 4
+
+KEY VALUE
+0 :: 5
+2 :: 1
+4 :: 0
+5 :: 2
+1 :: 3
+8 :: 4
+0 5
+2 1
+4 0
+5 2
+1 3
+8 4
+Sorting on the basis of value 
+
+KEY VALUE
+4 0
+2 1
+5 2
+1 3
+8 4
+0 5
+Sorting on the basis of key 
+0 5
+1 3
+2 1
+4 0
+5 2
+8 4
