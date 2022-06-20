@@ -1,0 +1,38 @@
+METHOD 1.  TC -> 0.56/1.38   
+  
+  int findPlatform(int arr[], int dep[], int n)
+    {
+    	// Your code here
+    	
+       	sort(arr,arr+n);
+    	sort(dep,dep+n);
+    	unordered_map<int,int>a;
+    	 
+a[0] = dep[0];
+int c=0; 
+int alert=1; //notify that no platform is available for new train
+
+for(int i=1; i<n; i++)
+{
+    int count=0; alert=1;
+	while(count<=c)
+	{
+		if(arr[i] <= a[count])
+			count++;
+		else
+		{
+			a[count]=dep[i];
+			alert = 0;
+			break;
+		}	
+	}
+
+	if(alert == 1)
+	{
+		c++;
+		a[c] = dep[i];
+	}
+
+}
+return c+1;
+    }
