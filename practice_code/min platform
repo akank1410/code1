@@ -16,7 +16,8 @@ for(int i=1; i<n; i++)
 {
     int count=0; alert=1;
 	while(count<=c)
-	{
+	{	    
+	//At any instance, same platfomr Cannot be used for both departure of a train & arrival of another train
 		if(arr[i] <= a[count])
 			count++;
 		else
