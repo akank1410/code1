@@ -1,3 +1,5 @@
+SITE: https://practice.geeksforgeeks.org/problems/stock-span-problem-1587115621/1
+
 METHOD 1 L TC 1.23/2.32
 
 vector <int> calculateSpan(int arr[], int n)
