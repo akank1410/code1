@@ -1,0 +1,32 @@
+0.02/1
+
+    bool find3Numbers(int arr[], int n, int X)
+    {
+        //Your Code Here
+          sort(arr,arr+n);
+
+    for(int i=0; i<n; i++)
+    {
+
+        int target = X-arr[i];
+        int p1=i+1, p2=n-1;
+        int sum = 0;
+    while(p1<p2)
+    {
+        sum = arr[p1] + arr[p2];
+        if( sum > target )
+            p2--;
+        else if( sum < target )
+            p1++;
+        else 
+        return true;
+    }
+    }
+    return false;
+    }
+    
+    ------------------------------------
+    
+    METHOD 2:
+    
+    
