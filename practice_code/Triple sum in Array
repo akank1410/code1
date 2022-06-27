@@ -1,4 +1,4 @@
-0.02/1
+0.02/1.02sec
 
     bool find3Numbers(int arr[], int n, int X)
     {
@@ -27,6 +27,30 @@
     
     ------------------------------------
     
-    METHOD 2:
+    METHOD 2: (time limit exceed)
     
+      bool find3Numbers(int arr[], int n, int X)
+    {
+        //Your Code Here
     
+
+    for(int i=0; i<n; i++)
+    {
+        unordered_map<int,int> m;
+        int target = X-arr[i];
+        for(int j=0;j<n-1;j++)
+        {
+            if(i==j)
+            continue;
+            
+            m[arr[j]]++;
+            if(m.find(target-arr[j]) != m.end())
+                return true;
+        }
+    }
+    return false;
+    }
+    
+    --------------
+    in method 2 we have used unordered map. But if you will notice we have to fill the everytime after fixing the first element. Due to which it takes more time as
+    compared to the method 1. Where we are in the startinh itself sorted the array which seems to be efficent in this casse.
