@@ -75,4 +75,6 @@ vector <int> calculateSpan(int arr[], int n)
  
  1. use vector <int> v (1,n) to initialize the output.
  2. Good methods
+ 3. The elements absent in the middle of stack means that they are the right index after the missing 
+ index's element is greater than the missing elemnt after it in consecutive.
  
