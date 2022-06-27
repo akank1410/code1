@@ -67,5 +67,12 @@ vector <int> calculateSpan(int arr[], int n)
        }
        return span;
     }
+    
+    
+ -------------
  
+ POINTS TO KEEP IN MIND
+ 
+ 1. use vector <int> v (1,n) to initialize the output.
+ 2. Good methods
  
