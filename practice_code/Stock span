@@ -1,3 +1,5 @@
+METHOD 1 L TC 1.23/2.32
+
 vector <int> calculateSpan(int arr[], int n)
     {
        // Your code 
@@ -42,3 +44,26 @@ vector <int> calculateSpan(int arr[], int n)
        }
        return v;
     }
+    
+ =-----------------------------------------------
+ 
+ METHOD 2 : 1.04/2.32
+ 
+     vector <int> calculateSpan(int price[], int n)
+    {
+       // Your code 
+       stack<int> s;
+       vector<int> span(n,1);
+       
+       for(int i=0; i<n; i++)
+       {
+           while(!s.empty() && price[s.top()] <= price[i]){
+               span[i] += span[s.top()];
+               s.pop();
+           }
+           s.push(i);
+       }
+       return span;
+    }
+ 
+ 
