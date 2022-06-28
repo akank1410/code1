@@ -1,0 +1,41 @@
+TC : 0.08/1.07
+
+    vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
+    {
+    vector <int> v;
+    int counter=0,i=0;
+
+    while(true)
+    {
+    
+    int a=0+i,b=0+i;//0->0,0:0,
+    while(b<=c-1-i)
+    {v.push_back(matrix[a][b++]);counter++;}
+    if(counter>=r*c)
+    break;
+
+    int c1=1+i,d=c-1-i;
+    while(c1<=r-1-i)
+    {v.push_back(matrix[c1++][d]);counter++;}
+    if(counter>=r*c)
+    break;
+
+    int e=r-1-i,f=c-2-i;
+    while(f>=0+i)
+    {v.push_back(matrix[e][f--]);counter++;}
+    if(counter>=r*c)
+    break;
+
+    int g=r-2-i,h=0+i;
+    while(g>=1+i)
+    {v.push_back(matrix[g--][h]);counter++;}
+    if(counter>=r*c)
+    break;
+    
+    i++;
+    }
+    
+    return v;
+    }
+    
+    Site:  https://practice.geeksforgeeks.org/problems/spirally-traversing-a-matrix-1587115621/1
