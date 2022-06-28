@@ -1,0 +1,19 @@
+0.03/1.07
+
+string isSubset(int a1[], int a2[], int n, int m) {
+    
+    unordered_map<int,int> mm;
+    string s="Yes";
+    
+    for(int i=0;i<n;i++)
+    mm[a1[i]]++;
+    
+    for(int i=0;i<m;i++){
+    if(mm.find(a2[i]) != mm.end())
+        continue;
+    else{
+    s="No";break;}}
+    return s;
+}
+
+https://practice.geeksforgeeks.org/problems/array-subset-of-another-array2317/1#
