@@ -1,0 +1,23 @@
+TC : 0.27/1.5
+
+    long long trappingWater(int arr[], int n){
+        // code here
+        
+        vector <int> max_left(n), max_right(n);
+        max_left[0] = arr[0];
+        max_right[n-1] = arr[n-1];
+        long long sum=0;
+        
+        for(int i=1; i<n; i++)
+        max_left[i] = max(max_left[i-1], arr[i]);
+        
+        for(int j=n-2; j>=0;  j--)
+        max_right[j] = max(max_right[j+1],arr[j]);
+        
+        for(int i=0;i<n;i++)
+        sum += min(max_right[i],max_left[i]) - arr[i];
+        
+        return sum;
+        
+        
+    }
