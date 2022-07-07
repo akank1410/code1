@@ -21,3 +21,30 @@ TC : 0.27/1.5
         
         
     }
+    
+    
+METHOD 2:
+
+    def trappingWater(self, arr,n):
+        #Code here
+        
+        left_max = [arr[0]];
+        right_max = [];
+        
+        for i in range(n-1):
+            right_max.append(0)
+            
+        right_max.append(arr[n-1])
+        
+        for i in range(1,n):
+            left_max.insert(i, max(left_max[i-1],arr[i]))
+        
+        for i in range(n-2,-1,-1):
+            right_max[i] = max(right_max[i+1], arr[i])
+            
+        sum =0
+        
+        for i in range(0,n):
+            sum += min(left_max[i], right_max[i]) - arr[i]
+            
+        return sum
