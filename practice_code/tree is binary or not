@@ -1,4 +1,5 @@
 if the inorder is in increasing order the tree is binary tree
+in BST inorder traversal is always sorted
 
  struct Node {
   int data;
