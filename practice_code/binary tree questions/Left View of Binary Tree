@@ -1,0 +1,55 @@
+
+struct Node
+{
+  int data;
+  struct Node* left;
+  struct Node* right;
+  
+  Node(int x) {
+    data = x;
+    left = right = NULL;
+    }
+ };
+ 
+ int height(Node* node)
+ {
+  if(node == NULL) return 0;
+  
+  int lheight = height(node->left);
+  int rheight = height(node->right);
+  
+  if(lheight > rheight)
+  return lheight+1;
+  else
+  return rheight+1;
+  
+  }
+  
+  void printCurrentLevel(Node *root, int level, vector <int> &a)
+  {
+    if(root ==  NULL) return;
+    if(level == 1)
+    a.push_back(root->data);
+    elsel if(level > 1)
+      { printCurrentLevel(root->left, level-1, a);
+        printCurrentLevel(root->right, level-1, a);}
+  }
+  
+  void print_left(Node* root, vector<int> &ans)
+  {
+    int h = height(root);
+    int i;
+    for(int i=1;i<=h;i++)
+    {
+    vector<int> d;
+    printCurrentLevel(root,i,d);
+    ans.push_back(d[0]);
+    }
+   }
+   
+   vector<int> leftView(Node *root)
+   {
+    vector<int>v;
+    print_left(root,v);
+    return v;
+    }
