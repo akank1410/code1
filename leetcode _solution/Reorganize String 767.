@@ -1,0 +1,40 @@
+// case "baaba" 
+ 
+ string reorganizeString(string s) 
+    {
+        
+        priority_queue<pair<int,char>> pq;
+        unordered_map<char,int> m;
+        string ans; //to store the modified string
+        
+        //traversing the string to get the count of each character
+        for(auto x:s) m[x]++;
+        
+        //pushing the map into priority queue
+        for(auto x:m)
+            pq.push(make_pair(x.second,x.first));
+        
+        while(pq.size() > 1)
+        {
+            auto top1 = pq.top();
+            pq.pop();
+            auto top2 = pq.top();
+            pq.pop();
+            
+            ans += top1.second;
+            ans += top2.second;
+            
+            //decrementing the used character
+            top1.first--;
+            top2.first--;
+            
+            if(top1.first>0) pq.push(top1);
+            if(top2.first>0) pq.push(top2);      
+        }
+        
+        if(!pq.empty()){
+            if(pq.top().first > 1) return "";
+            else ans += pq.top().second;
+        }
+        return ans;
+    }
