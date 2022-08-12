@@ -1,4 +1,14 @@
 // case "baaba" 
+// The idea is to build a max heap with freq. count
+// a) At each step, we choose the element with highest frequency (a,b) where b is the element, to append to result.
+// b) Now that b is chose. We can't choose b for the next loop. So, we don't add b with decrement value count immediately into
+// the heap. Rather we store it in 2 variables.
+// c) Before we pdate our varibales as mentioned in step2, we know that whatever 2 variables contains,
+// has become eligible for next loop selection. So we add that back in the heap.
+
+// In essence,
+// at each step, we make the currently added one ineligible for next step, by not adding it to the heap
+// at each step, we make the preciously added one eligigble for next step, by adding it back to the heap
  
  string reorganizeString(string s) 
     {
@@ -37,4 +47,65 @@
             else ans += pq.top().second;
         }
         return ans;
+        
+   ---------------------------------------------------      
+   
+    // logic 2 (will not if the first character count is less than 2nd character count
+    void swap(char &a, char &b)
+    {
+        char c = a;
+        a = b;
+        b = c;
+    }
+    
+    string reorganizeString(string s) 
+    {
+        
+        
+        int size = s.size();
+        int flag = 0;
+        unordered_map<char,int> m;
+        char charr;
+        int maxx;
+        //count the occurance of each character
+        for(int i=0;i<size; i++)
+            m[s[i]]++;
+        
+        //findidng maximum occurance of a character
+        for(auto iterator = m.being(); iterator != m.end()l iterator++)
+        {
+            if(iterator>second > maxx)
+            {
+                maxx = iterator->second;
+                charr = iterator->first;
+            }
+        }
+        
+        for(int i=0 ;i <size-1; i++)
+        {
+            for(int j =i+2; j<size; j++)
+            {
+                if(s[i] == s[i+1] && s[i] != s[j] )
+                {
+                    swap(s[i+1],s[j]);
+                    break;
+                }
+            }
+        }
+        
+        for(int i=0; i<size-1; i++)
+        {
+            if(s[i] == s[i+1])
+            {
+                flag=1;
+                break;
+            }
+        }
+        
+        if(flag == 1)
+            return "";
+        else
+            return s;
+            
+        
     }
