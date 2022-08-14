@@ -104,3 +104,68 @@ public:
         return res;
     }
 };
+
+----------------------------------------------------------------------------------------
+
+//DFS
+
+class Solution {
+public:
+    void check(vector<vector<int>>& grid, int i, int j, vector<vector<bool>>& vis, bool& atl, bool& pac)
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        vector<array<int,2>> dir = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+        bool ans =false;
+        
+        if(i==m-1 || j==n-1) atl = true;
+        if(i==0 || j==0) pac=true;
+        
+        if(pac && atl) return;
+        
+        for(auto el:dir)
+        {
+            int r = i + el[0], c = j + el[1];
+            if(r>=0 && r<m && c>=0 && c<n)
+            {
+                if(grid[r][c] <= grid[i][j] && !vis[r][c] )
+                {
+                    vis[r][c] = true;
+                    check(grid,r,c,vis,atl,pac);
+                    vis[r][c] = false;
+                }
+            }
+        }
+        return;
+    }
+    
+    
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        
+      vector<vector<int>> res;
+        bool atl=false, pac=false;
+        
+        int m = heights.size();
+        int n = heights[0].size();
+        
+        vector<vector<bool>> vis(m, vector<bool>(n,false));
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                atl = false; pac = false;
+                check(heights, i, j, vis, atl, pac);
+                if(atl && pac)
+                {
+                    vector<int> v1={i,j};
+                    res.push_back(v1);
+                }
+            }
+        }
+        return res;
+    }
+};
+
+//https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/2385551/c%2B%2B-oror-easy-oror-dfs
