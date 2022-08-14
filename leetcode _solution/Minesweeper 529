@@ -14,3 +14,68 @@
 // {1,-1} -> down left
 // {-1,1} -> up right
 
+class Solution {
+    int X[8] = {0,0,1,-1,1,1,-1,-1};
+    int Y[8] = {1,-1,0,0,1,-1,1,-1};
+    int N,M;
+    
+    class check{
+        int n,m;
+    public:
+        check(int N, int M) {n=N; m=M;}
+        
+        bool move( vector<vector<char>>& grid, int i, int j){
+            
+            if(i<0 || j<0 || i>=n || j>=m || grid[i][j]!='E')
+                return false;
+            return true;
+        }
+        
+        bool mines(vector<vector<char>>& grid, int i, int j)
+        {
+            if(i<0 || j<0 || i>=n || j>=m || (grid[i][j]!='M' && grid[i][j]!='X'))
+                return false;
+            return true;
+        }
+    };
+    
+    void rec(vector<vector<char>>& grid, int i, int j)
+    {
+        int cnt=0;
+        check valid(N,M);
+        for(int id=0; id<8; id++)
+        {
+            if(valid.mines(grid, i+X[id], j+Y[id]))
+                cnt++;
+        }
+        
+        if(cnt != 0)
+        {
+            grid[i][j] = ('0' + cnt);
+            return;
+        }
+        
+        grid[i][j] = 'B';
+        for(int id=0; id<8; id++)
+        {
+            if(valid.move(grid, i+X[id], j+Y[id]))
+                rec(grid, i+X[id], j+Y[id]);
+        }
+    }
+public:
+    vector<vector<char>> updateBoard(vector<vector<char>>& board, vector<int>& click) {
+        
+        N  = board.size();
+        M = board[0].size();
+        
+        if(board[click[0]][click[1]] == 'M')
+        {
+            board[click[0]][click[1]] = 'X';
+            return board;
+        }
+        
+        rec(board, click[0], click[1]);
+        return board;
+        
+    }
+};
