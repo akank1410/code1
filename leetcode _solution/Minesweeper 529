@@ -1,0 +1,16 @@
+// We stop when one of our neighbours have adjacent mines in it
+
+// case: 1. m[x][y] == M  => m[x][y] = 'X'
+// case: 2. m[x][y] != M 
+//          CASE A. mines are in cell adjacent to one clicked : fill clicked cell with number
+//          CASE B. mines are not adjacent cell clicked : marked clicked cell as 'B' and pass it to neighbours
+
+// {0,1} -> same row but column  increment by one
+// {0,-1} -> same row but column decrement by one
+// {1,0} -> down
+// {-1,0} ->up
+// {-1,-1} -> top left
+// {1,1} -> down right
+// {1,-1} -> down left
+// {-1,1} -> up right
+
