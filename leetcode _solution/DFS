@@ -3,7 +3,7 @@ METHOD1:
 class Graph{
 public: 
         map<int, bool> visited;
-        mao<int, list<int>> adj;
+        map<int, list<int>> adj;
         
         //function to add an edge to graph
         void addEdge(int v, int w);
@@ -92,7 +92,7 @@ void Graph::DFSUtil(int v)
       //Call the recursive helper function to print DFS traversal starting from all vertices one by one
       for(auto i: adj)
         if(visited[i.first] == false)
-            DFSUtile(i.first);
+            DFSUtil(i.first);
  }
  
 //Driver Code
@@ -113,3 +113,5 @@ int main()
   
   return 0;
 }
+
+// https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
