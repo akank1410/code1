@@ -30,3 +30,23 @@ Array increasing subsequence will be stored at dp[i] but the catch is that the l
 
 Method2:
 
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        
+        vector<int> q;
+        for(auto x:nums)
+        {
+            if(q.empty() || x>q.back())
+                q.push_back(x);
+            else
+                q[lower_bound(q.begin(),q.end(),x) - q.begin()] = x;
+        }
+        return q.size();
+    }
+};
+
+//use case of lower_bound
+//https://www.geeksforgeeks.org/lower_bound-in-cpp/
+
+
