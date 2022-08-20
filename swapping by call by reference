@@ -1,0 +1,30 @@
+PROGRAM TO SWAP 2 NUMBERS USING CALLL-BY-REFERENCE METHOD
+
+void swap(int &a, int &b)
+{ int temp = b; b=a; a=temp; }
+
+int main(){
+	int a=5, b=10;
+	swap(a,b);
+	cout<<a<<" "<<b;
+	return 0;
+}
+
+---------------
+------------
+
+void swap(int *a, int *b)
+{ int temp = *b; *b=*a; *a=temp; }
+
+int main(){
+	int a=5, b=10;                        
+	swap(&a,&b);
+	cout<<a<<" "<<b;
+	return 0;
+}
+
+
+200 - a=5
+300 - b=10
+
+-------------------------------------
