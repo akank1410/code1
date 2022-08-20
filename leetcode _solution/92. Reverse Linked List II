@@ -1,0 +1,81 @@
+//ALGORITHM
+/*
+1. check if the |left-right|== 0 which means there is no element to reverse so return head;
+2. iterate the list and store left-1 element address in leftadd and right+1 address in rightadd
+3. if left=1 leftadd will not be stored and if right is the last index then rightadd = NULL
+4. declare 3 variables node* prev, cur, nex so as to store 3 position
+5. if left=1 that means our prev=rightadd , cur=head, nex = cur->next
+6. if right is last index: prev = NULL, cur = leftadd->next, nex = nex->next
+7. in normal cases: prev = rightadd, cur = leftadd->next, nex = nex->nex
+8. use the same logic as that of reversing the linked 
+9. after reversing check if the left == 1 then head = cur 
+/*
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        
+        
+        // case1: abs(right-left) == 0  (head == NULL || head->next == NULL) || -> head=head;
+        // case2: when the list is reverse from left = 1 [1,2,3] left=1, right=2 => [2 1 3]
+        // case3: when the list is reverse from right = 3 [1,2,3] left=2, right=3 => [1 3 2]
+        
+        if(abs(left-right)==0)
+            return head;
+        
+        ListNode* leftadd = NULL;
+        ListNode* rightadd = NULL;
+        ListNode* temp = head;
+        
+        
+        // temp = 1 => i=1, 1<=2T, 1==0F, 1==2F, temp = 2 i=2 => 2==2T 2==0F 2==2T rightadd = 3 temp = 3 i=3 => 3==2F
+        //rightadd = 3
+        //prev = 3 , left==1T cur=1, nex=2
+        
+        int ite=1;
+        while(ite<=right)
+        {
+            if(ite == left-1)
+                leftadd = temp;
+            else if(ite == right)
+                rightadd = temp->next;
+            
+            temp = temp->next;
+            ite++;
+        }
+    
+        ListNode *prev = rightadd;
+        ListNode *cur = (left == 1)? head: leftadd->next;  // when left is the last element
+        ListNode *nex = cur->next;
+        ite=1;
+        while(ite != right-left+1)
+        {
+            cur->next = prev;
+            prev = cur;
+            cur= nex;
+            nex = nex->next;
+            ite++;
+        }
+        
+        cur->next = prev;
+        
+        
+        if(left == 1)
+            head = cur;
+        else
+            leftadd->next = cur;
+        
+        return head;
+        
+    }
+};
