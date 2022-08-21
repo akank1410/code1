@@ -1,0 +1,12 @@
+int main()
+{
+int d = 3;
+char c = 'g';
+
+int idx = (c - 'a' + d)%26;
+if(idx<0) idx += 26;  // u can repace this expression with : inc = (inc + 26)%26;
+c = (char)(idx + 'a');
+cout<<c;
+return 0;
+}
+
