@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Solution {
+public:
+    string shiftingLetters(string s, vector<vector<int>>& shifts) {
+    
+        map <int,int> m;
+        for(int i=0;i<=s.size();i++)
+            m[i]=0;
+        
+        //calculate the prefix table
+        for(int i=0; i<shifts.size(); i++)
+        {
+            int start = shifts[i][0], end = shifts[i][1];
+            int dir = (shifts[i][2] == 1)? 1:-1;
+            m[start] += dir;
+            m[end+1] -= dir;
+        }
+        
+        //cumulative effect of each shift on each index
+        for(int i=1; i<=s.size();i++)
+            m[i] += m[i-1];
+        
+        for(int i=0; i<s.size(); i++)
+        {
+            int inc = (s[i] - 'a' + m[i])%26;
+            inc = (inc +26)%26;
+            s[i] = 'a'+inc;
+        }
+        
+        return s;
+    }
+};
