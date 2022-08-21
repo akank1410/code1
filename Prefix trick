@@ -1,0 +1,165 @@
+
+n size array with 3 columns
+
+Q =   each row represents queue queries | from L to R index u got to increase every element by +x[i]
+L R x
+1 3 2
+2 4 3
+2 5 4
+
+After executing the queries find the final state of the array
+
+  1 2 3 4 5
+  0 0 0 0 0
+  2 2 2 0 0 
+  2 5 5 3 0
+  2 9 9 7 4 Final result
+  
+  O(Q*n)
+  n=maximum no of R-L+1
+  any query can range from 1 to n
+  ---------------------
+  OPTIMIZED SOLUTION
+  
+  1.Take a prefix array of size n+1
+  pre[L] += x
+  pre[R+1] -= x
+  
+  pre  1  2  3  4  5  6
+       2  0  0 -2  0  0 
+       2  3  0 -2 -3  0
+       2  7  0 -2 -3 -4  //O(Q)
+       
+       2  9  9  7  4  0 //O(n)
+       
+       So we can say every query can be solved in O(1)
+       Total number of queries Q
+       Complexity O(Q+n) << O(Q*n)
+       =============================================================================
+       QUESTION
+       Constant Palindrome Sum
+       ------------------------
+       
+       a[] = { 6,1,1,7,6,3,4,6 };
+       k = 7
+       Constraint:  1<=a[i]<=k
+       Find min. no. of changes so that a[i] + a[n-i-1] = constant
+       
+       Solution:
+       
+       4 pairs : (6,6), (1,4), (1,3), (7,6)
+       
+       Method1: a[i] + a[n-i-1] = const
+        Min Sum: 1   +   1      = 2
+        Max Sum: k   +   k      = 2k = 14
+        
+        //Min no. of changes require in each pair to make the sum equal to constant
+        for const = 2 => 2+1+1+2=6
+                  = 3 => 2+1+1+2=6
+                  = 4 => 2+1+0+2=5
+                  = 5 => 2+0+1+2=5
+                  = 6 => 2+1+1+2=6
+                  = 7 => 1+1+1+1=4
+                  = 8 => 1+1+1+1=4
+                  = 9 => 1+1+1+1=4
+                  =10 => 1+1+1+1=4
+                  =11 => 1+1+2+1=5
+                  =12 => 0+2+2+1=5
+                  =13 => 1+2+2+0=5
+                  =14 => 2+2+2+1=7
+                  
+                  min = 4 
+                  Ans = 4
+Algorithm:
+-----------
+
+unordered_map <int,int> par;
+
+for(int i=0;i<n/2;i++)
+m[i]=n-i-1;
+
+int min_sum = 2, max_sum = 2*k, int minn = INT_MAX;
+for(int i=min_sum; i<=max_sum; i++)            // O(2*k - 2) * 
+{ int count=0;
+  for(auto p:m)
+    {
+      if( sum-p.second >=1 || sum-p.first >= 1)
+        count += 1;
+    }
+    minn = min(minn,count);
+    
+ }
+ 
+ return minn
+ 
+ // we are traversing for all the possible values of constant 
+ // and then doing linear traversal for all the pairs and trying to find our total changes that 
+ // needs to be done to get the const as sum 
+ //so here the time complexity will go quadatic
+ //  This algorithm will lead to TLE
+ 
+ ============
+ 
+ METHOD 2:
+ 
+ 1. Write the pairs in format (min,max)
+ 
+ 4 pairs : (6,6), (1,4), (1,3), (6,7)
+ 
+ What are the possbile number of constant values that can be obtained by changing only one element
+ in the pair = [L+1,R+k]
+ 
+ (6 , 6), ( 1, 4), ( 1, 3), ( 6, 7)
+ [7, 13], [ 2,11], [ 2,10], [ 7,14]  //[L+1,R+k]
+ 
+ Hashmap <sum,count> : (12,1),(5,1),(4,1)(13,1)
+ 
+ *****
+ Use prefix trick to find number of pair in constants from 2 to 14
+ 
+ Q:  L  R  x 
+     7 13  1
+     2 11  1
+     2 10  1
+     7 14  1
+     
+  0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+  0 0 0 0 0 0 0 1 0 0  0  0  0  0 -1  0
+  0 0 1 0 0 0 0 1 0 0  0  0 -1  0 -1  0
+  0 0 2 0 0 0 0 1 0 0  0 -1 -1  0 -1  0
+  0 0 2 0 0 0 0 2 0 0  0 -1 -1  0 -1 -1
+  --------------------------------------
+  0 0 2 2 2 2 2 4 4 4  4  3  2  2  1  0 
+  
+  0:   Hashmap <sum,count> : (12,1),(5,1),(4,1)(13,1)
+  0/1:
+  0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+  0 0 2 2 2 2 2 4 4 4  4  3  2  2  1
+    
+ 0 changes can be calculated by the hash table
+ for 0/1 changes we can use prefic sum trick and then substract obtained no. of zeros from hash table
+ 
+  const   0   1   2    total changes  
+    2  :  0   2   2     2*1 + 2*2 = 6
+    3  :  0   2   2       6
+    4  :  1   1   2       5
+    5  :  1   1   2       5
+    6  :  0   2   2       6
+    7  :  0   4   0       4
+    8  :  0   4   0       4
+    9  :  0   4   0       4
+    10 :  0   4   0       4
+    11 :  0   3   1       5
+    12 :  1   1   2       5 
+    13 :  1   1   2       5 
+    14 :  0   1   3       7
+ 
+ min(total changes) = 4 = Ans
+ 
+  
+
+       
+       
+       
+       
+       
