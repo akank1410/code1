@@ -156,10 +156,53 @@ for(int i=min_sum; i<=max_sum; i++)            // O(2*k - 2) *
  
  min(total changes) = 4 = Ans
  
+  // In this way we can find out for every possbile x from 2 to 2k
+  and that can be done in O(1) using prefix trick
   
+  Time Complexity:
+  
+Compute Prefix Table : O(N)
+Obtain hash Table    : O(N)
 
-       
-       
-       
-       
+Run a loop from 2 to 2k to find min changes requires O(2k)
+because inside the loop what we are doing is O(1) operations to get the count.
+
+
+ ALGORITHM:
+ 1. take the array input
+ 2. initialize map<int,int> pre; 
+        for(int i=0; i<=2k+1;i++) pre[i]=0;
+        
+ 3. push all pair into vectore or hash map
+    -> vector<int,int> vec : for(int =0;i<n/2;i++) v.push_back(make_pair(min(s[i],s[n-i-1]),max(s[i],s[n-i-1]));
+    -> unordered_map<int,int> vec : for(int =0;i<n/2;i++) m[min(s[i],s[n-i-1])] = max(s[i],s[n-i-1]);
+    //first: min, second: max
+    
+ 4. cal prefix
+ 
+ for(auto x:vec)
+    {
+    int num1= x.first  + 1 ;  int num2 = x.second  + k;
+    pre[num1] += 1;
+    pre[num1+1] -= 1;
+    }
+    
+  for(int i=2; i<=2k+1;i++)
+          pre[i] = pre[i-1]  + pre[i];
+          
+ 5.   Traverse all the possible values of const
+ int minn=n,cal;  // minnn = n;  because that is the maximum no. of changes that u can do
+  for(int i=2; i<=2k;i++)
+ {
+    int one = pre[i] - vec[i];
+    int two = n/2 - one;
+    cal = one + 2*two;
+    minn = min(minn,cal);
+ }
+ 
+ cout<<minn
+ 
+ -------------------------------------------------------------------------------
+ 
+ REFERENCE: https://youtu.be/TSUvGqRFlug
        
