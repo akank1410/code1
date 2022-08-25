@@ -84,6 +84,7 @@ void Graph::DFSUtil(int v)
   for(i = adj[v].begin(); i != adj[v].end(); i++)
         if(!visited[*i])
           DFSUtile(*i);
+ }
           
   //The function to do DFS traversal. It uses recursive DFSUtil()
   void Graph::DFS()
