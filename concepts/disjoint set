@@ -178,3 +178,46 @@ Time Complexity	O(N)O(N)	O(\log N)O(logN)	O(\log N)O(logN)	O(\log N)O(logN)
 
 --------------------------------------------------------
         https://leetcode.com/explore/featured/card/graph/618/disjoint-set/3880/
+	
+	
+	============
+	
+	To implement disjoin sets. We will use the root array to store parent array or the vertex.
+For the find function everytime we try to find the root node of a vertex, it needs to find a parent node, and the parent node of the
+vertex. 
+
+size represents no. of elements in the array that is the number of vertices.
+root is initialize to have the size of the number of vertices. 
+
+Since we have each vertex isolated by itself in the root array initially the root of each vertex will be itself. 
+
+Quick Find Implementation of the Disjoint Set
+-------------------------------------------------
+
+class UnionFind
+{
+public:
+		UnionFind(int sz) : root(size)
+		{
+			for(int i=0; i<size; i++)
+				root[i] = i;
+		}
+
+		int find (int x)
+		{ return root[x]; }
+
+		void unionSet(int x, int y)
+		{ int rootx = find(x);
+		  int rooty = find(y);
+
+		  if(rootx == rooty)
+		  {
+			for(int i=0; i < root.size(); i++)
+			{	if(root[i] == rootY)	{ root[i] = rootX; }	}
+		  }
+		}
+	
+		bool connected(int x, int y)
+		{ return find(x) == find(y);	}
+
+											
