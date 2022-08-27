@@ -1,3 +1,6 @@
+unionFind(31 ms	13.8 MB) with rank
+unionFind (28 ms	13.8 MB) <=O(n)
+
 class Solution {
 public:
     
@@ -112,3 +115,62 @@ Compressed code:
         while(node!=parent[node])
             node=parent[node];
         return node;
+---------------------------------------------------------------------
+
+DFS Solution (83 ms	19.1 MB)
+
+class Solution {
+public:
+    
+class Graph
+{
+    public:
+    map<int,list<int>> adj;
+    map<int, bool> vis;
+    
+    void addEdge(int x, int y){
+        adj[x].push_back(y);}
+    
+    void DFS(int v)
+    {
+        vis[v]=true;
+        
+        for(auto x:adj[v])
+        {
+            if(!vis[x])
+                DFS(x);
+        }
+    }
+    
+    int log()
+    {
+        int c=0;
+        for(auto x:adj)
+        {
+            if(!vis[x.first])
+            {c++; DFS(x.first); }
+        }
+        return c;
+    }
+    
+};
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        
+    int size = isConnected.size();
+    Graph g;
+        for(int i=0; i<size; i++)
+        {
+            for(int j=0; j<size; j++)
+            {
+                if(isConnected[i][j] == 1)
+                {
+                    g.addEdge(i,j);
+                }
+            }
+        }
+        
+       return g.log();
+
+    }
+};
