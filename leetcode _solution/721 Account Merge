@@ -1,0 +1,76 @@
+class Solution {
+public:
+    
+    class Graph
+    {   
+        public:
+        map<string,list<string>> adj;
+        map<string,bool> visited;
+        
+        void addEdge(string v, string w)
+        {
+            adj[v].push_back(w);
+        }
+        void DFS(vector<string>& mer_acc, string mail)
+        {
+            visited[mail] = true;
+            mer_acc.push_back(mail);
+        
+            for(auto x: adj[mail])
+            {
+                if(! (visited[x]))
+                    DFS(mer_acc, x);
+            }
+        }
+        
+    };
+    
+
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts)
+    {
+            
+        Graph g;
+        
+        // Graph 
+        for(auto acc:accounts)
+        {
+            
+            string firstmail=acc[1];
+            for(int i=2; i<acc.size(); i++)
+            {
+                g.addEdge(firstmail, acc[i]);
+                g.addEdge(acc[i], firstmail);
+            }
+        }
+        
+        
+        
+        //Traverse over all the accounts to store components
+        vector<vector<string>> mergeAcc;
+        for(auto acc: accounts)
+        {   
+            
+            string accName = acc[0], firstmail = acc[1];
+            
+            //If the mail is visited, it's a part of different component
+            // Hence perform DFS only if the MAIL IS NOT VISITED
+            if(!g.visited[firstmail])
+            {   
+                vector<string>mer_acc;
+                mer_acc.push_back(accName);
+                g.DFS(mer_acc,firstmail);
+                
+                sort(mer_acc.begin()+1,mer_acc.end());
+                mergeAcc.push_back(mer_acc);     
+            }    
+        }
+
+        return mergeAcc;
+
+            
+    }
+};
+
+---------------------------------------------------------------------------
+
+
