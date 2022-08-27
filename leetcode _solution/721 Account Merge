@@ -1,3 +1,16 @@
+Algorithm:
+1. Create an adjacency list. For each account add an edge between the first email anf each of the
+other emails in the account.
+2. Traverse over the account; for each account, check if the first email in the account
+(accountFirstEmail) was already visited. If so, then do not start a new DFS. Otherwise, perform DFS with this
+email as the source node.
+3. During each DFS, store the traversed emails in an array mergedAccount, also mark all these emails as 
+visited.
+4. After the DFS traversal is over, sort the emails and add the account name (accountName) at the start of the vector
+mer_acc.
+5. Store the vector mergeAcc in the answer list mergeAcc.
+
+
 class Solution {
 public:
     
