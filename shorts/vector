@@ -1,0 +1,13 @@
+vectors are dynamic array with the ability to resize itself automatically when an element is inserted or deleted,
+with their storage being handled automatically by the container.
+
+at() : it is used to reference the element present at the position given as the parameter to the function
+if the position is not presetn in the vector, it throws out_of_range.
+TC = O(1)
+SYNTAX: myvector = 1,2,3
+        myvector.at(2) => 3
+        
+        myvector = 3,4,1,7,3
+        myvector.at(3) => 7
+          
+
