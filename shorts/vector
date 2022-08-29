@@ -9,5 +9,12 @@ SYNTAX: myvector = 1,2,3
         
         myvector = 3,4,1,7,3
         myvector.at(3) => 7
+        
+        -------------------------------------------------------------------------------
+        
+count(): returns no. of occurences of an element in a given range.
+Returns the number of elements in the range [first,last) that compares equal to val.
+
+
           
 
