@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int garbageCollection(vector<string>& garbage, vector<int>& travel) {
+        
+        //count len of string in each house
+        // create prefix array(use 1-indexing
+        //declare 3 variable and to store the last house which contains the garbage (houses are 0 based inedex)
+        
+        
+        vector<int> prefix_sum;
+        int sum=0;
+        for(int i=0; i<travel.size(); i++)
+        {
+            sum += travel[i];
+            prefix_sum.push_back(sum);
+            cout<<sum<<" ";
+        }
+        cout<<endl;
+        
+        
+        int glass=0, plastic=0, metal=0;
+        int count=0;
+
+        for(int i=0; i<garbage.size(); i++)
+        {
+            unordered_map<char,int> alpha;
+            alpha['G'] = 0; alpha['M'] = 0; alpha['P'] = 0;
+            
+            for(char c:garbage[i])
+            {
+               alpha[c]++;
+            } 
+            count += alpha['G'] + alpha['M'] + alpha['P'];
+            if(alpha['G']>0) glass=i;
+            if(alpha['M']>0) metal=i;
+            if(alpha['P']>0) plastic=i;
+        }
+        
+        if(glass != 0)
+        count += prefix_sum[glass-1]; 
+        
+        if(plastic != 0)
+        count += prefix_sum[plastic-1]; 
+        
+        if(metal != 0)
+        count += prefix_sum[metal-1]; 
+        
+        return count;
+    }
+};
