@@ -1,3 +1,37 @@
+METHOD 1: 14 ms	8.8 MB
+
+     unordered_map<int, vector<int>> v;
+
+        int n = mat.size(); //rows
+        int m = mat[0].size(); //columns
+        
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<m; j++)
+            {
+                v[i-j].push_back(mat[i][j]);
+            }
+        }
+        
+        for(int i=0; i<v.size(); i++)
+        {
+           sort( v[i].begin(), v[i].end());
+        }
+        
+        
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<m; j++)
+            {
+                mat[i][j] = v[i-j][0];
+                 v[i-j].erase(v[i-j].begin());
+            }
+        }
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+METHOD2:
+
 22 ms	9.8 MB
 
 class Solution {
