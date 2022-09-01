@@ -1,0 +1,52 @@
+// Method1 : Recursion -> find the height
+// 11 ms	12.3 MB 
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    
+    int height(TreeNode* root)
+    {
+        if(root == NULL) return 0;    
+        
+        int h1 = height(root->left);
+        int h2 = height(root->right);
+        
+        return max(h1,h2)+1;
+    }
+    
+    void levelnode(TreeNode* root, int level, vector<vector<int>>& ans)
+    {
+                if(root == NULL) return;
+        
+                ans[level].push_back(root->val);
+                levelnode(root->left, level+1, ans);
+                levelnode(root->right, level+1, ans);
+                
+    }
+    
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        
+        int h = height(root);
+        vector<vector<int>> ans(h);
+        
+        levelnode(root, 0, ans);
+        
+        return ans;
+    }
+};
+
+==============================================================================
+==============================================================================
+
+METHOD 2:
