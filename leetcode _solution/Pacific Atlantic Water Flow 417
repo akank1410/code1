@@ -1,5 +1,7 @@
 REFERECNE LINK: https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/2406290/C%2B%2B-oror-BFS-oror-Easy-to-Understand
 concept of bfs
+//Runtime: 65 ms, faster than 63.68% of C++ online submissions for Pacific Atlantic Water Flow.
+//Memory Usage: 18.1 MB, less than 64.16% of C++ online submissions for Pacific Atlantic Water Flow.
 
 class Solution {
 public:
