@@ -1,3 +1,65 @@
+//DFS
+//Runtime: 88 ms, faster than 35.05% of C++ online submissions for Pacific Atlantic Water Flow.
+//Memory Usage: 17.5 MB, less than 88.01% of C++ online submissions for Pacific Atlantic Water Flow.
+class Solution {
+public:
+    
+    vector<array<int,2>> adj = {{0,1}, {1,0}, {-1,0}, {0,-1}};
+    
+    void dfs(vector<vector<int>>& heights, int r, int c, int x, int y, vector<vector<bool>>& vis)
+    {
+        vis[x][y] = true;
+        
+        for(auto a : adj)
+        {
+            int i = x + a[0], j = y + a[1];
+            if(i>=0 && i<r && j>=0 && j<c && heights[i][j] >= heights[x][y] && !vis[i][j])
+                dfs(heights, r, c, i, j, vis);
+        }
+    }
+ 
+    
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        
+    
+        int r = heights.size(), c = heights[0].size();
+        vector<vector<bool>> pacific (r,vector<bool>(c,false));
+        vector<vector<bool>> atlantic (r,vector<bool>(c,false));
+        queue<pair<int,int>> q;
+        vector<vector<int>> ans;
+        
+        if(r==0 || c==0)
+            return ans;
+        
+        for(int i=0; i<r; i++)
+            dfs(heights, r, c, i, 0, pacific);
+        
+        for(int i=1; i<c; i++)
+            dfs(heights, r, c, 0, i, pacific);
+        
+        for(int i=0; i<r; i++)
+            dfs(heights, r, c, i, c-1, atlantic);
+        
+        for(int i=0; i<c-1; i++)
+            dfs(heights, r, c, r-1, i, atlantic);
+        
+        for(int i=0; i<r; i++)
+        {
+            for(int j=0; j<c; j++)
+            {
+                if(pacific[i][j] && atlantic[i][j])
+                    ans.push_back({i,j});
+            }
+        }
+
+        return ans;
+    }
+};
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+
 REFERECNE LINK: https://leetcode.com/problems/pacific-atlantic-water-flow/discuss/2406290/C%2B%2B-oror-BFS-oror-Easy-to-Understand
 concept of bfs
 //Runtime: 65 ms, faster than 63.68% of C++ online submissions for Pacific Atlantic Water Flow.
