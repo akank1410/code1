@@ -1,3 +1,89 @@
+Method1:
+//Runtime: 18 ms, faster than 6.85% of C++ online submissions for Symmetric Tree.
+//Memory Usage: 17.9 MB, less than 5.99% of C++ online submissions for Symmetric Tree.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int height(TreeNode* root)
+    {
+        if(root == NULL) return 0;
+        
+        int h1 = height(root->left);
+        int h2 = height(root->right);
+        
+        return max(h1, h2) + 1;
+    }
+    
+    void tree_array_left(TreeNode* root, int level, list<int>& lis)
+    {
+        
+        if(root == NULL){ lis.push_back(INT_MIN); return;}
+        if(level == 1) lis.push_back(root->val);
+        else{
+        tree_array_left(root->left, level-1, lis);
+        tree_array_left(root->right, level-1, lis);
+        }
+        
+    }
+    
+    void tree_array_right(TreeNode* root,  int level, list<int>& lis)
+    {
+        
+        if(root == NULL){ lis.push_front(INT_MIN); return;}
+        if(level == 1) lis.push_front(root->val);
+        else
+        {
+        tree_array_right(root->left, level-1, lis);
+        tree_array_right(root->right, level-1, lis);
+        }
+        
+    }
+    
+    bool isSymmetric(TreeNode* root) {
+        
+        int h1 = height(root->left), h2 = height(root->right);
+        
+        if(h1 != h2) return false;
+        cout<<h1<<endl;
+        
+        for(int i = 1; i<=h1; i++)
+        {
+            list<int> l,r;
+            tree_array_left(root->left, i, l);
+            tree_array_right(root->right, i, r);
+            
+            cout<<"\n---------------------------"<<i<<"--------------------\n";
+            for(auto x:l) cout<<x<<" ";
+            cout<<endl;
+            
+            for(auto x:r) cout<<x<<" ";
+            cout<<endl;
+            cout<<endl;
+            if(l!=r)
+                return false;
+        }
+        
+        return true;
+    }
+};
+
+// [1,2,2,null,3,null,3]
+
+
+==================================================================================================
+================================================================================================
+
 //Runtime: 8 ms, faster than 59.38% of C++ online submissions for Symmetric Tree.
 Memory Usage: 16.2 MB, less than 93.78% of C++ online submissions for Symmetric Tree.
 
