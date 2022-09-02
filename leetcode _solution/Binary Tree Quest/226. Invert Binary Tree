@@ -1,0 +1,55 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Invert Binary Tree.
+Memory Usage: 9.8 MB, less than 5.93% of C++ online submissions for Invert
+
+    void invert(TreeNode* &left, TreeNode* &right)
+    {
+        if(left == NULL && right == NULL) return;
+        
+        TreeNode* dum = left;
+        left = right;
+        right = dum;
+        
+        if(left == NULL) 
+        invert(right->left, right->right);
+        else if(right == NULL)
+        invert(left->left,left->right);
+        else
+        {
+             invert(right->left, right->right);
+             invert(left->left,left->right);
+        }  
+    }
+    
+    TreeNode* invertTree(TreeNode* &root) {
+        if(root==NULL) return root;
+        
+        invert(root->left, root->right);
+        
+        return root;
+        
+    }
+    
+    
+    ================================================
+    // Runtime: 14 ms, faster than 6.84% of C++ online submissions for Invert Binary Tree.
+// Memory Usage: 9.7 MB, less than 79.73% of C++ online submissions for Invert Binary Tree.
+    
+    
+        void invert(TreeNode* &root)
+    {
+        if(root == NULL) return;
+        
+        swap(root->left, root->right);
+
+        invert(root->left);
+        invert(root->right);
+        
+    }
+    
+    TreeNode* invertTree(TreeNode* &root) {
+        
+        invert(root);
+        
+        return root;
+        
+    }
