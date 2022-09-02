@@ -1,3 +1,59 @@
+//METHOD 1 : brude force for sum 
+// Runtime: 30 ms, faster than 32.77% of C++ online submissions for Average of Levels in Binary Tree.
+//Memory Usage: 22.5 MB, less than 72.83% of C++ online submissions for Average of Levels in Binary Tree.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    
+    vector<double> averageOfLevels(TreeNode* root) {
+        
+        vector<double> ans;
+        if(root == NULL) return ans;
+        
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while(! q.empty())
+        {
+            long long int sum=0;
+            int counter = 0;
+            int n = q.size();
+            
+            for(int i=0; i<n; i++)
+            {
+                TreeNode* node = q.front();
+                q.pop();
+                
+                sum += node->val;
+                counter += 1;
+                
+                if(node->left != NULL) q.push(node->left);
+                if(node->right != NULL) q.push(node->right);
+            }
+            
+            double a = double(sum)/counter;
+            ans.push_back(a);
+            
+        }
+        
+        return ans;
+    }
+};
+
+=======================================================================================================
+==========================================================================================================
+
+//USING accumulate() to sum all the values in vector
 //Runtime: 45 ms, faster than 5.09% of C++ online submissions for Average of Levels in Binary Tree.
 //Memory Usage: 22.8 MB, less than 16.66% of C++ online submissions for Average of Levels in Binary Tree.
 
@@ -47,6 +103,12 @@ public:
         return ans;
     }
 };
+
+/* 1. The idea is to use BFS, which is a common way to traverse the tree level by level
+   2. For a standard BFS, we can use queue to push the first root node into a queue
+   3. Then remove the fromt of queue, add its children to back of the queue
+   4. Do the above steps until the queue is empty
+   5. 
 
 ===========================================================================================
 ==============================================================================================
