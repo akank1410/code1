@@ -1,0 +1,28 @@
+ // Runtime: 81 ms, faster than 28.65% of C++ online submissions for Two Sum IV - Input is a BST.
+// Memory Usage: 38.7 MB, less than 34.52% of C++ online submissions for Two Sum IV - Input is a BST.
+    
+    void inorder(TreeNode* root, vector<int>& v)
+    {
+        if(root == NULL) return;
+        
+        inorder(root->left, v);
+        v.push_back(root->val);
+        inorder(root->right, v);
+    }
+    
+    bool findTarget(TreeNode* root, int k) {
+        
+        vector<int> ans;
+        inorder(root, ans);
+        
+        unordered_map<int,int> m;
+        
+        for(auto x:ans)
+        {
+            
+            if(m.find(k-x) != m.end())
+                return true;
+            m[x] = k-x;
+        }
+        return false;
+    }
