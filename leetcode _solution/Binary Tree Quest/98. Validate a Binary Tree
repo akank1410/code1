@@ -1,0 +1,31 @@
+// Concept: inorder traversal of binary search tree is increasing order using unique elements
+// Method1:
+
+// Runtime: 8 ms, faster than 96.15% of C++ online submissions for Validate Binary Search Tree.
+// Memory Usage: 23 MB, less than 6.49% of C++ online submissions for Validate Binary Search Tree.
+
+    void inorder(TreeNode* root, vector<int>& ans )
+    {
+        
+        if(root == NULL) return;
+        inorder(root->left, ans);
+        ans.push_back(root->val);
+        inorder(root->right, ans);
+    }
+        
+        
+    bool isValidBST(TreeNode* root) {
+        
+     if(root==NULL) return false;
+     else
+     {
+        vector<int> v;
+        inorder(root, v);
+        set<int> s (v.begin(), v.end());
+        vector<int> c;
+         c.assign(s.begin(), s.end());
+        if(v == c) return true;
+        else return false;
+     }
+     
+    }
