@@ -1,4 +1,4 @@
-// METHOD 1:
+// METHOD 1: (Kadane algorithm) TC O(n) : SC O(1)
 // Runtime: 127 ms, faster than 86.79% of C++ online submissions for Maximum Subarray.
 // Memory Usage: 67.7 MB, less than 53.81% of C++ online submissions for Maximum Subarray.
     int maxSubArray(vector<int>& nums) {
