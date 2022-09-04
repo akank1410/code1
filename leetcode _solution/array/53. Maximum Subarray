@@ -1,0 +1,17 @@
+// Runtime: 174 ms, faster than 50.53% of C++ online submissions for Maximum Subarray.
+// Memory Usage: 67.8 MB, less than 10.96% of C++ online submissions for Maximum Subarray.
+
+    int maxSubArray(vector<int>& nums) {
+        
+        int sum=0, m = INT_MIN;
+        
+        for(int i=0; i<nums.size(); i++)
+        {
+            if(sum + nums[i] < nums[i])
+                sum=0;
+            
+            sum += nums[i];
+            m = max(m,sum);
+        }
+        return m;
+    }
