@@ -1,3 +1,64 @@
+
+// Runtime: 35 ms, faster than 55.76% of C++ online submissions for N-ary Tree Level Order Traversal.
+// Memory Usage: 11.6 MB, less than 86.69% of C++ online submissions for N-ary Tree Level Order Traversal.
+//Stack implementation <level,node>
+
+ vector<vector<int>> levelOrder(Node* root) {
+        
+          if(root == NULL)
+            return {};
+        vector<vector<int>> ans;
+            
+        stack<pair<int,Node*>> s;
+        s.push({0,root});
+        
+        while(! s.empty())
+        {   
+            const auto [level, node] = s.top();
+            s.pop();
+            
+            if(level == size(ans))
+                ans.push_back({});
+            
+            ans[level].push_back(node->val);
+            
+            for( auto it = node->children.crbegin(); it != node->children.crend(); it++ )
+            {
+                s.push({level+1, *it});
+            }
+           
+        }
+        return ans;   
+    }
+};
+
+===============================================================================
+==============================================================================
+    //queue implementation with different way of writing code
+    
+    static vector<vector<int>> levelOrder(const Node* root) {
+        if (!root) return {};
+
+        vector<vector<int>> ans;
+        queue<const Node*> q;
+        q.push(root);
+        while (!empty(q)) {
+            int q_size = size(q);
+            ans.push_back({});
+            while (q_size--) {
+                const Node* node = q.front(); q.pop();
+                ans.back().push_back(node->val);
+                for (const Node* child : node->children) {
+                    q.push(child);
+                }
+            }
+        }
+        return ans;
+    }
+
+
+==========================================================================
+===========================================================================
 // Runtime: 50 ms, faster than 15.83% of C++ online submissions for N-ary Tree Level Order Traversal.
 // Memory Usage: 11.9 MB, less than 34.37% of C++ online submissions for N-ary Tree Level Order Traversal.
 
