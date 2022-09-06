@@ -108,3 +108,15 @@ int main() {
 
 4 5
 */
+
+/*
+update the indegree
+declare a queue
+traverse a loop and check for nodes with indeg =0 and push them into queue
+
+start a while loop
+	pop a eleemnt from queue
+	push the pop node into ans vector
+	traverse all the node on which pop node is directed and decrement the indeg of all those nodes
+	and if the indeg after decrementing is =0 push them to  queue
+	*/
