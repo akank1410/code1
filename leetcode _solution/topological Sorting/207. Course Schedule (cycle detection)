@@ -1,0 +1,69 @@
+// 54 ms	14.4 MB
+class Solution {
+public:
+    
+    class Graph
+    {
+        //vector<list<int>> adj;
+        unordered_map<int,list<int>>adj;
+        vector<int> indeg;
+        public:
+        Graph(int s)
+        {   
+            //adj(size);
+            //indeg(size,0);
+           // adj.resize(s);
+            indeg.resize(s,0);
+        }
+        
+        void addEdge(int x, int y)
+        {
+            adj[x].push_back(y); // x->y
+            indeg[y]++;
+        }
+
+        bool topo(int num)
+        {   int count=0;
+            queue<int> q;
+            for(int i=0; i<num; i++)
+            {
+                if(indeg[i] == 0)
+                {
+                    q.push(i);
+                    
+                    count++;
+                }
+            }
+            
+            while (! q.empty())
+            {
+                int ele = q.front(); q.pop();
+                
+                for(auto x:adj[ele])
+                {
+                    if(indeg[x] == 0) return false;;
+                    if(--indeg[x] == 0)
+                    {
+                        q.push(x);
+                        count++;
+                    }
+                }
+            }
+         
+            if(count == num)
+                return true;
+            
+         return false;
+        }
+        
+    };
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        
+        Graph g(numCourses);
+        for(int i=0; i< prerequisites.size(); i++)
+            g.addEdge(prerequisites[i][1], prerequisites[i][0]);
+        
+       return g.topo(numCourses);
+        //return false;
+    }
+};
