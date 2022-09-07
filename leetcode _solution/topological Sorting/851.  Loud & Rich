@@ -1,4 +1,4 @@
-//Topological Sort
+//Topological Sort | bfs
 // Runtime: 194 ms, faster than 50.54% of C++ online submissions for Loud and Rich.
 // Memory Usage: 50.1 MB, less than 17.64% of C++ online submissions for Loud and Rich.
    
