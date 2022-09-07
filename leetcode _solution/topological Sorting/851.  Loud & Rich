@@ -1,0 +1,116 @@
+//Topological Sort
+// Runtime: 194 ms, faster than 50.54% of C++ online submissions for Loud and Rich.
+// Memory Usage: 50.1 MB, less than 17.64% of C++ online submissions for Loud and Rich.
+   
+   vector<int> loudAndRich(vector<vector<int>> richer, vector<int> quiet) {
+        
+        vector<int> ans(quiet.size(),-1);
+        
+        vector<vector<int>> adj(quiet.size());
+        vector<int> indeg(quiet.size(),0);
+        
+        for(int i=0; i<richer.size(); i++)
+        {
+            adj[richer[i][0]].push_back(richer[i][1]);
+            indeg[richer[i][1]]++;
+        }
+        
+        queue<int> q;
+        for(int i=0; i<quiet.size(); i++)
+        {
+            if(indeg[i] == 0)
+            { q.push(i);
+               }
+             ans[i] = i;
+        }
+        
+        while(! q.empty())
+        {
+            int ele = q.front();
+            q.pop();
+            
+            for(auto x:adj[ele])
+            {
+                if(quiet[ans[ele]] < quiet[ans[x]])
+                    ans[x] = ans[ele];
+                if(--indeg[x] == 0)
+                    q.push(x);
+            }
+        }
+        
+        return ans;
+    }
+========================================================================
+
+// DFS
+// 267 ms	50.3 MB
+
+using namespace std;
+class Solution {
+public:
+    
+    class Graph
+    {
+        unordered_map<int,vector<int>> adj;
+        public:
+        
+        void addEdge(int x,int y)
+        {
+            adj[x].push_back(y);
+        }
+               
+        int dfs(int node, vector<int> &ans, vector<int> &quiet)
+                {
+//memoization: which we will use to recursively calculate the solution for each of the person
+//solution here is who is the person who is atleast as richers as the person & has the min. quietness value
+                    if(ans[node] != -1)
+                        return ans[node];
+                    
+                    int minPos = node;
+                    int min = quiet[node];
+                    
+                    for(auto x: adj[node])
+                    {
+                        int idx = dfs(x,ans,quiet);
+                        
+                        if(min > quiet[idx])
+                        {
+                            min = quiet[idx];
+                            minPos = idx; 
+                        }
+                        
+                    }
+                    
+                    ans[node] = minPos;
+                    return minPos;
+                }
+        // 0 1 2 3 4 5 6
+        
+        //     0  1  2  3  4  5  6  7
+    //minPos:  5  5  2  5  4  5  6
+    //min   :  1  1  5  1  6  1  7
+      // ans:  5  5  2  5  4  5  6 -1
+    //         0  1  2  3  4  5  6  7
+        //function to recursively calculate the sil
+    };
+    
+    vector<int> loudAndRich(vector<vector<int>> richer, vector<int> quiet) {
+        
+        vector<int>ans(quiet.size(),-1);
+        
+        Graph g;
+        
+        for(int i=0; i<richer.size(); i++ )
+        {
+           g.addEdge(richer[i][1], richer[i][0]);
+        }
+    
+        
+        for(int i=0; i<quiet.size(); i++)
+        {
+            ans[i] = g.dfs(i, ans, quiet);
+        }
+        
+        return ans;
+    }
+};
