@@ -116,3 +116,52 @@ int main()
 }
 
 // https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+
+===============================================================
+
+#include <bits/stdc++.h>
+using namespace std;
+class Graph
+{
+    unordered_map<int,vector<int>> m;
+    vector<bool> vis;
+    public:
+    Graph(int s){
+        vis.resize(s,false);
+    }
+
+    void addEdge(int x,int y)
+    {
+        m[x].push_back(y);    }
+
+    void dfs()
+    {
+        stack<int> s;
+        s.push(0);
+
+        while(!s.empty())
+        {
+            int ele = s.top(); s.pop();
+            if(!vis[ele])
+            {
+                cout<<ele<<" ";
+                vis[ele] = true;
+            }
+
+            for(auto x:m[ele])
+            {
+                if(!vis[x])
+                s.push(x);
+            }
+        }
+    }
+};
+int main() {
+    Graph g(5);
+    g.addEdge(0,2);
+    g.addEdge(0,3);
+    g.addEdge(0,1);
+    g.addEdge(2,4);
+    g.dfs();
+    return  0;
+}
