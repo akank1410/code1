@@ -1,0 +1,35 @@
+
+
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        
+        unordered_map<char,int> count;
+        unordered_map<char,bool> vis;
+        for(auto x:s)
+        {
+            count[x]++;
+            vis[x] = false;
+        }
+        
+        string res = "";
+        for(auto x:s)
+        {
+            count[x]--;
+            if(!vis[x])
+            {
+                while( res.size() > 0 && res.back() > x && count[res.back()]>0)
+                {
+                    vis[res.back()] = false;
+                    res.pop_back();
+                }
+                
+                res += x;
+                vis[x] = true;
+            }
+            
+        }
+        
+        return res;
+    }
+};
