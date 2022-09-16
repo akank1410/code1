@@ -1,0 +1,5 @@
+Greedy is short-sighted. For global optimum, we pick local optimum.
+But picking this Local Optimum may restrict greater positive product afterward.
+We have to solve these subproblems successively and at each step return the maximum of two possible answers.
+When all operations are done, we can return 0.
+
