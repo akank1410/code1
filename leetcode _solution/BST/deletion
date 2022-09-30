@@ -67,5 +67,72 @@ class Solution(object):
         
         
         ------------------
+        # replacing with r sub tree
+        # Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def deleteNode(self, root, key):
+        key_par = None
+        dum = root
+        right = False 
+        
+        while dum:
+            if key > dum.val:
+                key_par = dum
+                dum = dum.right
+                right = True 
+            elif key < dum.val:
+                key_par = dum
+                dum = dum.left
+                right = False 
+            else:
+                break;
+            
+        if dum:
+                if not dum.left:
+                    print("1")
+                    if key_par:
+                        if right: 
+                            key_par.right = dum.right
+                        else:
+                            key_par.left = dum.right
+                    else:
+                        return dum.right
+                elif not dum.right:
+                    print("2")
+                    if key_par:
+                        if right: 
+                            key_par.right = dum.left 
+                        else:
+                            key_par.left = dum.left
+                    else:
+                        return dum.left
+                else:
+       
+
+                    t = {}
+                    t["dummy"] = dum
+                    t["key_par"] = dum
+                    t["dum"] = dum.right
+                    #print(t["dum"].right)
+                    if not t["dum"].left:
+                        print("4")
+                        t["key_par"].right = t["dum"].right
+                    else:
+                        print("5")
+                        while t["dum"].left: 
+                           
+                            t["key_par"] = t["dum"]
+                            t["dum"] = t["dum"].left
+
+                        t["key_par"].left = t["dum"].right
+                    t["dummy"].val = t["dum"].val
+        return root
+        
+        ----------------------
         
         https://leetcode.com/problems/delete-node-in-a-bst/discuss/822263/Python3-iterative-and-recursive
